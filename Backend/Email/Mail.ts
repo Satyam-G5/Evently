@@ -24,7 +24,7 @@ module.exports.sendMessage = async (reciever : string) => {
     let response = {
         body : { 
             intro : `NEW MEETING SCHEDULED ` ,
-            outro : 'You have new meeting Scheduled . Please visit the website for further details .'
+            outro : 'You have new meeting Scheduled with ${} . Please visit the website for further details .'
         }
     }
     

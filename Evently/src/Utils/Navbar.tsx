@@ -17,10 +17,9 @@ const Navbar: React.FC = () => {
   return (
     <nav className="w-full h-20 bg-custom fixed top-0 flex justify-between z-10">
       <div className="text-3xl font-bold mt-6 ml-3 flex flex-row">
-        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" className="lucide mt-2 lucide-laptop-2"><rect width="18" height="12" x="3" y="4" rx="2" ry="2" /><line x1="2" x2="22" y1="20" y2="20" /></svg>
-        <span className=" text-black bg-clip-text text-3xl ml-3">
+      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" className="lucide mt-2 lucide-calendar"><rect width="18" height="18" x="3" y="4" rx="2" ry="2"/><line x1="16" x2="16" y1="2" y2="6"/><line x1="8" x2="8" y1="2" y2="6"/><line x1="3" x2="21" y1="10" y2="10"/></svg>        <span className=" text-black bg-clip-text text-3xl ml-3">
           <Link to='/'>
-            Wave
+            Evently
           </Link>
         </span>
       </div>
@@ -54,7 +53,7 @@ const Navbar: React.FC = () => {
 
 
       {/* Desktop Menu */}
-      <div className="hidden md:bg-richblack md:rounded-full md:h-16 md:w-96 border-t-4 md:flex md:flex-row md:justify-evenly md:mt-6 md:mr-2 ">
+      <div className="hidden md:bg-black md:rounded-full md:h-16 md:w-96 border-t-4 md:flex md:flex-row md:justify-evenly md:mt-6 md:mr-2 ">
 
         <Link to="/" className="text-xl text-white p-3 hover:cursor-pointer ">
           Home
