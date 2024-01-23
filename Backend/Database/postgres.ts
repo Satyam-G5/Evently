@@ -1,12 +1,12 @@
 import { Pool } from 'pg';
-import dotenv from 'dotenv';
+import dotenv from 'dotenv'; 
 
 dotenv.config()
 
 const pool = new Pool({
     host: 'localhost',
     port: 5433,
-    database: 'talkitive',
+    database: 'Evently',
     user: 'postgres',
     password: 'Satyam12'
 });

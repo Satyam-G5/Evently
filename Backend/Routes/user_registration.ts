@@ -10,6 +10,6 @@ router.post("/log_user" , loguser );   // Loggin the user
 router.get("/get_user" , getuser);  // User details 
 
 router.get("/all_user" , getalluser);  // all users in database 
-
+ 
 export default router ;  
 

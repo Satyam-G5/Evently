@@ -5,8 +5,8 @@ import pool from '../Database/postgres'
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 
-const secretKey = process.env.JWT_SECRET_USER;
-
+const secretKey = process.env.JWT_SECRET_USER || "Secret";
+ 
 // *********************** User Registration **********************
 
 const addusers = async (req: any, res: Response) => {
@@ -24,7 +24,7 @@ const addusers = async (req: any, res: Response) => {
             const hashpass = await bcrypt.hash(password, salt);
             if(hashpass){
             const newUser = await pool.query(
-                "INSERT INTO panel(Firstname , LastName , Email , password , phoneNo ) VALUES ($1, $2, $3, $4 ,$5 ) RETURNING *",
+                "INSERT INTO panel(Firstname , LastName , Email , password  ) VALUES ($1, $2, $3, $4 ) RETURNING *",
                 [firstname, lastname, email, hashpass]
             );
 
@@ -48,7 +48,7 @@ const loguser = async (req: Request, res: Response) => {
 
     try {
         const { email, password } = req.body;
-        const check_Email: any = await pool.query("SELECT * FROM users WHERE Email = $1", [email]);
+        const check_Email: any = await pool.query("SELECT * FROM panel WHERE Email = $1", [email]);
 
         if (check_Email.rows.length === 0) {
             return res.status(401).json({ success: false, message: "Email not found" });
@@ -92,7 +92,7 @@ const getuser = async (req: Request, res: Response) => {
         // console.log("User ID:", decoded.userId);
 
 
-        const user: any = await pool.query("SELECT * FROM users WHERE user_id = $1", [decoded.userId]);
+        const user: any = await pool.query("SELECT * FROM panel WHERE user_id = $1", [decoded.userId]);
         // console.log("The recieving user is ", user)
 
         if (user.rows.length === 0) {

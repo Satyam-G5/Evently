@@ -7,3 +7,5 @@ const router = express.Router() ;
 router.post("/save_events" , save_events );
 
 router.get("/get_events:UserID" , get_events);
+
+export default router;

@@ -71,7 +71,7 @@ const register : React.FC= () => {
   return (
     <div className='flex justify-center items-center min-h-screen bg-custom'>
        <div className=" w-md  p-8 rounded-md">
-                <h2 className="text-4xl underline text-center font-semibold mb-10">Registration Form</h2>
+                <h2 className="text-4xl text-center font-semibold mb-24">Evently - Register</h2>
                 <form onSubmit={handleSubmit}>
                     <div className="md:grid md:grid-cols-2 md:gap-x-24 md:gap-y-12 flex flex-col gap-y-8 mt-12">
                         <div className='flex flex-row justify-around'>
@@ -136,7 +136,7 @@ const register : React.FC= () => {
                     </div>
                     <button
                         type="submit"
-                        className="md:ml-44 h-10 mt-4 w-80 text-black hover:text-white hover:bg-black font-semibold border-2 rounded-full border-black"
+                        className="md:ml-44 h-10 mt-4 w-80  bg-orange-800 text-white hover:bg-black font-semibold border-2 rounded-full "
                         onClick={saveuser}
                     >
                         
@@ -147,10 +147,10 @@ const register : React.FC= () => {
                           <p className="mb-0 mr-2">Already have an account?</p>
                           <button
                             type="button"
-                            className="w-20 h-8 text-black hover:text-white hover:bg-black font-semibold border-2 rounded-full border-black"
+                            className="w-32 h-10 text-white bg-orange-800 hover:bg-black font-semibold border-2 rounded-full "
                             data-te-ripple-init
                             data-te-ripple-color="light">
-                            <Link to={"/signIn"}>
+                            <Link to="/signIn">
                               SingIn
                             </Link>
                           </button>

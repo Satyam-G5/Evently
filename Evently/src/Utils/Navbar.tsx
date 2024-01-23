@@ -1,9 +1,9 @@
 import React, { useState ,useContext } from 'react';
 import { Link } from 'react-router-dom';
-// import AppContext from '../context/user.context';
+import AppContext from '../Context_api/user.context';
 
 const Navbar: React.FC = () => {
-    // const appcontext = useContext(AppContext);
+    const appcontext = useContext(AppContext);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   const toggleMobileMenu = () => {
@@ -11,14 +11,14 @@ const Navbar: React.FC = () => {
   };
 
   const logout =async () => {
-    // appcontext?.changeLoginState(false);
+    appcontext?.changeLoginState(false);
   } 
 
   return (
-    <nav className="w-full h-20 bg-custom fixed top-0 flex justify-between z-10">
-      <div className="text-3xl font-bold mt-6 ml-3 flex flex-row">
-      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" className="lucide mt-2 lucide-calendar"><rect width="18" height="18" x="3" y="4" rx="2" ry="2"/><line x1="16" x2="16" y1="2" y2="6"/><line x1="8" x2="8" y1="2" y2="6"/><line x1="3" x2="21" y1="10" y2="10"/></svg>        <span className=" text-black bg-clip-text text-3xl ml-3">
-          <Link to='/'>
+    <nav className="w-full h-20 bg-custom fixed top-0 flex justify-between bg-white z-10">
+      <div className=" text-orange-800 font-bold mt-6 ml-3 flex flex-row">
+       <span className=" text-black bg-clip-text text-4xl ml-3">
+          <Link className='text-orange-800 font-custom' to='/'>
             Evently
           </Link>
         </span>
@@ -53,25 +53,25 @@ const Navbar: React.FC = () => {
 
 
       {/* Desktop Menu */}
-      <div className="hidden md:bg-black md:rounded-full md:h-16 md:w-96 border-t-4 md:flex md:flex-row md:justify-evenly md:mt-6 md:mr-2 ">
+      <div className="hidden md:bg-orange-800 md:rounded-full md:h-16 md:w-96 border-t-4 md:flex md:flex-row md:justify-evenly md:mt-8 md:mr-2 ">
 
-        <Link to="/" className="text-xl text-white p-3 hover:cursor-pointer ">
+        <Link to="/home" className="text-xl text-white p-3 hover:cursor-pointer ">
           Home
         </Link>
 
-        <Link to="/contacts" className="text-xl text-white p-3 hover:cursor-pointer">
-          Contacts
+        <Link to="/pages" className="text-xl text-white p-3 hover:cursor-pointer">
+          Pages
         </Link>
 
-        <Link to="/live" className="text-xl text-white p-3 hover:cursor-pointer">
-          Live
+        <Link to="/premium" className="text-xl text-white p-3 hover:cursor-pointer">
+          Premium
         </Link>
       </div>
 
 
 
       <div className="mt-3.5 mr-2 justify-center">
-        {true ? <Link to="/">
+        {appcontext?.loginState ? <Link to="/">
           <div onClick={logout} className="p-2 bg-white mr-4 rounded-lg shadow-lg hover:bg-failred hover:cursor-pointer transition duration-300 ease-in-out transform hover:-translate-y+1 hover:scale-105">
             <svg xmlns="http://www.w3.org/2000/svg" className="icon icon-tabler icon-tabler-logout" width="30" height="30" viewBox="0 0 24 24" stroke-width="1.5" stroke="#2c3e50" fill="none" stroke-linecap="round" stroke-linejoin="round">
               <path stroke="none" d="M0 0h24v24H0z" fill="none" />
@@ -83,7 +83,7 @@ const Navbar: React.FC = () => {
         </Link> : <Link className='' to="/signIn">
           <div className="flex flex-row p-2 bg-white mr-4 rounded-lg shadow-lg hover:bg-slate-300 hover:cursor-pointer transition duration-300 ease-in-out transform hover:-translate-y+1 hover:scale-105">
           <div className='font-semibold mr-2 mt-1'>
-            LogIn/SignUp
+            LogIn
           </div>
             <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" className="lucide lucide-user-circle-2"><path d="M18 20a6 6 0 0 0-12 0" /><circle cx="12" cy="10" r="4" /><circle cx="12" cy="12" r="10" /></svg>
           </div>
