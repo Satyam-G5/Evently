@@ -7,6 +7,11 @@ interface AppContextType {
     token: string | undefined;
     newuser : any ;
     Name :any;
+    Email : any ;
+    url : any ;
+    seturl : any ;
+    BookingState :any ;
+    setBookingState :any;
     changeLoginState: (login: boolean) => void;
     changeToken: (newtoken: string) => void;
     getuser_details: () => void;
@@ -29,16 +34,14 @@ export const AppProvider: React.FC<AppProviderProps> = ({ children }) => {
         email : string ; 
         password : string ;
     }
-    // interface conMem {
-    //        cID : string ;
-    //     SenderID : string ;
-    //     RecieverID : string ;
-    // }
 
-    const [loginState, setLoginState] = useState<boolean | undefined>();
+    const [loginState, setLoginState] = useState<boolean>(false);
     const [token, setToken] = useState<string | undefined>();
-    const [newuser, setNewuser] = useState<userType>()
-    const [Name , setName] = useState<string>('')
+    const [newuser, setNewuser] = useState<userType>();
+    const [Name , setName] = useState<string>('');
+    const [Email , setEmail] = useState<string>('');
+    const [BookingState , setBookingState] = useState<boolean>(false)
+    const [url  ,seturl] = useState()
    
 
 
@@ -97,6 +100,7 @@ export const AppProvider: React.FC<AppProviderProps> = ({ children }) => {
         if (newuser) {
             localStorage.setItem('newuser', JSON.stringify(newuser));
             setName(newuser.firstname)
+            setEmail(newuser.email)
         }
         if (token !== undefined) {
             localStorage.setItem('token', JSON.stringify(token));
@@ -112,6 +116,11 @@ export const AppProvider: React.FC<AppProviderProps> = ({ children }) => {
         token,
         newuser,
         Name,
+        Email,
+        BookingState , 
+        url ,
+        seturl,
+        setBookingState,
         changeLoginState,
         changeToken,
         getuser_details,

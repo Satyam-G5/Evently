@@ -17,6 +17,21 @@ export default defineConfig({
       },
       "/all_user" : {
         target : "http://localhost:8000"
+      },
+      "/save_events" : {
+        target : "http://localhost:8000"
+      },
+      "/get_events" : {
+        target : "http://localhost:8000" 
+      },
+      "/book_events" : {
+        target : "http://localhost:8000"
+      },
+      "/booking_success" : {
+        target : "http://localhost:8000"
+      },
+      "/collect_book" : {
+        target : "http://localhost:8000"
       }
     }
   },

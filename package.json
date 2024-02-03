@@ -1,0 +1,10 @@
+{
+  "dependencies": {
+    "react-calendar": "^4.8.0",
+    "react-time-picker": "^6.6.0",
+    "uuid": "^9.0.1"
+  },
+  "devDependencies": {
+    "@types/uuid": "^9.0.8"
+  }
+}

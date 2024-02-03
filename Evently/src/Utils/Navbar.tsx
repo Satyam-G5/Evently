@@ -60,7 +60,7 @@ const Navbar: React.FC = () => {
         </Link>
 
         <Link to="/pages" className="text-xl text-white p-3 hover:cursor-pointer">
-          Pages
+          Events
         </Link>
 
         <Link to="/premium" className="text-xl text-white p-3 hover:cursor-pointer">

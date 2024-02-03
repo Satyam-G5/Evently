@@ -50,7 +50,14 @@ const signIn: React.FC = () => {
         }
         appContext.changeLoginState(login_success)
         appContext.changeToken(newtoken)
-        navigator("/home");
+        if(appContext.BookingState){
+          console.log("Url inthe signin component : " , appContext.url);
+          
+          navigator(`${appContext.url}`)
+        }else{
+
+          navigator("/home");
+        }
       }
       else {
         console.log("Login failed:", getresponse.message);

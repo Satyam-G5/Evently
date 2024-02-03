@@ -9,7 +9,7 @@ const start_page: React.FC = () => {
 
         <motion.h1 initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
-          transition={{ duration: 1 }} className='md:text-7xl text-4xl font-semibold'>Create your own plan and reminder calendars
+          transition={{ duration: 1 }} className='md:text-7xl text-4xl font-semibold'>Create your own plan with calendars reminder
         </motion.h1>
 
         <motion.h1 initial={{ opacity: 0 }}
@@ -25,7 +25,7 @@ const start_page: React.FC = () => {
           transition={{ duration: 1 }}
           className='flex md:flex-row md:justify-center flex-col items-center p-2'>
 
-          <Link className='font-custom' to="/signIn">
+          <Link className='' to="/signIn">
             <button className='flex flex-row mt-12 md:ml-6 h-12 w-40 text-white bg-orange-800 hover:text-white hover:bg-black font-semibold border-2 '>
               <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" className="ml-2 mr-2 mt-2 lucide lucide-sparkle"><path d="m12 3-1.9 5.8a2 2 0 0 1-1.287 1.288L3 12l5.8 1.9a2 2 0 0 1 1.288 1.287L12 21l1.9-5.8a2 2 0 0 1 1.287-1.288L21 12l-5.8-1.9a2 2 0 0 1-1.288-1.287Z" /></svg>                
               <span className='mt-2 ml-2 font-semibold'>Get Started</span>
