@@ -11,6 +11,7 @@ import Book_meeting from './components/Book_meeting';
 import Join_meet from './components/join_meet';
 import PaymentFailure from './Payments/PaymentFailure';
 import PaymentSuccess from './Payments/PaymentSuccess';
+import About from './components/About';
 
 
 import { AppProvider as UserAppProvider } from "./Context_api/user.context"
@@ -37,6 +38,7 @@ function App() {
                 <Route path="/meet_link/:category/:meetingId" element={<><Navbar /><Join_meet /></>} />
                 <Route path="/payment_success" element={<><PaymentSuccess /></>} />
                 <Route path="/payment_failed" element={<><PaymentFailure /></>} />
+                <Route path="/About" element={<><About /></>} />
               </Routes>
             </SocketProvider>
           </Router>

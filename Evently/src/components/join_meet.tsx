@@ -2,7 +2,6 @@ import React, { useContext, useEffect, useRef, useState } from "react";
 import ReactPlayer from "react-player";
 import SocketContext from "../Context_api/socket.context";
 import AppContext from "../Context_api/user.context"
-import { useNavigate } from "react-router-dom";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import image from '../assets/back-transformed.jpeg'
@@ -16,7 +15,6 @@ const join_meet: React.FC = () => {
 
 
   const socket = contextSocket?.socket;
-  const navigate = useNavigate();
 
   interface Message {
     senderID: string;

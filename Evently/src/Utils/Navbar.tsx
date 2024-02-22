@@ -44,8 +44,8 @@ const Navbar: React.FC = () => {
           Home
         </Link>
 
-        <Link to="/Events" className="text-xl text-white p-3 hover:cursor-pointer">
-          Events
+        <Link to="/About" className="text-xl text-white p-3 hover:cursor-pointer">
+          About
         </Link>
 
         <Link to="/premium" className="text-xl text-white p-3 hover:cursor-pointer">
@@ -63,8 +63,8 @@ const Navbar: React.FC = () => {
           Home
         </Link>
 
-        <Link to="/pages" className="text-xl text-white p-3 hover:cursor-pointer">
-          Events
+        <Link to="/About" className="text-xl text-white p-3 hover:cursor-pointer">
+        About Me
         </Link>
 
         <Link to="/premium" className="text-xl text-white p-3 hover:cursor-pointer">
