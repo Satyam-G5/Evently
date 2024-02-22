@@ -4,14 +4,14 @@ import pool from "../Database/postgres";
 async function book (req : Request , res : Response) {
     try {
         
-        const {link  ,host  ,users , video_chat  ,  date  , time } = req.body ;
+        const {link  , booker ,host  ,users , video_chat  ,  date  , time } = req.body ;
     
-        if(!link  || !host  || !users || ! video_chat  || !  date  || ! time ) {
+        if(!link || !booker  || !host  || !users || ! video_chat  || !  date  || ! time ) {
             console.log("Incomplete Information recieved");
         }
         else{
-            const add_booking = await pool.query('INSERT INTO bookmeet (link  ,host  ,users , video_chat  ,  date  , time ) VALUES ($1,  $2,  $3,  $4, $5, $6) RETURNING *' ,
-             [link  ,host  ,users , video_chat  ,  date  , time])
+            const add_booking = await pool.query('INSERT INTO bookmeet (link  ,booker ,host  ,users , video_chat  ,  date  , time ) VALUES ($1,  $2,  $3,  $4, $5, $6 , $7) RETURNING *' ,
+             [link  ,booker, host  ,users , video_chat  ,  date  , time])
 
             //  console.log("Rows inserted : " , add_booking.rowCount);
              res.status(200).json({success : true , done : add_booking})

@@ -8,18 +8,16 @@ const socket = io('http://localhost:8000');
 interface SocketContextType {
 
   socket: Socket | undefined;
-  localStream: MediaStream | undefined;
+  localStream: MediaStream | null;
   remoteStream: MediaStream | undefined;
- 
-  handleroom : (mail : any , room_id :string) => void ;
-  sendStreams : () => void;
+  host: any;
+  hostpresent : any ;
 
-  picked : boolean | undefined;
-  setpicked : any;
-  Callphone : any ;
-  setCallphone : any ;
+  sethostName: (host: any) => void;
+  handleroom: (mail: any, room_id: string) => void;
+  end_call : () => void ;
+  sendStreams: () => void;
   handleCallUser: () => void;
-
 }
 
 const SocketContext = createContext<SocketContextType | undefined>(undefined);
@@ -35,13 +33,11 @@ export const AppProvider: React.FC<AppProviderProps> = ({ children }) => {
 
   const [socketid, setSocketid] = useState<string>();
   const [remoteSocketId, setRemoteSocketId] = useState<string | null>(null);
-  const [localStream, setLocalStream] = useState<MediaStream>();
+  const [localStream, setLocalStream] = useState<MediaStream | null>(null);
   const [remoteStream, setRemoteStream] = useState<MediaStream>();
-  const [Room , setRoom] = useState<string>("")
-  const [EMail  , setEMail] = useState<string>("")
+  const [hostpresent, sethostpresent] = useState<boolean>(false)
+  const [host, setHost] = useState<string>("")
 
-  const [picked , setpicked] = useState<boolean>();
-  const [Callphone , setCallphone] = useState<any>();
 
 
 
@@ -49,29 +45,36 @@ export const AppProvider: React.FC<AppProviderProps> = ({ children }) => {
     setSocketid(id)
   }
 
+  const sethostName = (host: any) => {
+    socket.emit('hostpresent' , hostpresent)
+    setHost(host)
+  }
+
+  const sethostpresent_to_ture = () =>{
+    sethostpresent(true)
+  }
+
   // ********************************************** Set Room and Start Call *************************************************************
 
   const handleroom = useCallback(
-    (mail: any , room_id :any) => {
-    const room = room_id.replace('http://localhost:5173/', '');
-    console.log("Mail in handleroom", mail);
-    
-      setRoom(room);
-      setEMail(mail);
-      socket.emit("room:join",  mail, room );
+    (mail: any, room_id: any) => {
+      const room = room_id.replace('http://localhost:5173/', '');
+      console.log("Mail in handleroom", mail);
+
+      socket.emit("room:join", mail, room);
     },
     [socket]
   );
 
   const handleJoinRoom = useCallback(
-    (mail :any , room : any) => {
+    (_mail: any, room: any) => {
       navigate(`/${room}`);
     },
     [navigate]
   );
 
 
-  const handleUserJoined = useCallback(({ mail , socketId } : {mail:any ; socketId : any}) => {
+  const handleUserJoined = useCallback(({ mail, socketId }: { mail: any; socketId: any }) => {
     console.log(`Email ${mail} , socketID : ${socketId} joined room`);
     setRemoteSocketId(socketId);
   }, []);
@@ -85,16 +88,16 @@ export const AppProvider: React.FC<AppProviderProps> = ({ children }) => {
       video: true,
     });
     setLocalStream(stream)
-    
+
     const offer = await PeerService.getOffer();
     console.log(`offer sdp: ${offer.sdp}, socketId : ${socketid}`);
-    socket.emit("user_calling", { user : remoteSocketId, offer });
+    socket.emit("user_calling", { user: remoteSocketId, offer });
   };
-  
-  // ******************************************** Incomming Call **************************************************************
-  
 
-  const handleIncomingCall = async ({ from, offer }: { from: string ; offer: RTCSessionDescriptionInit }) => {
+  // ******************************************** Incomming Call **************************************************************
+
+
+  const handleIncomingCall = async ({ from, offer }: { from: string; offer: RTCSessionDescriptionInit }) => {
     try {
       console.log("Handle Incomming call triggered : ", from, offer);
       setRemoteSocketId(from);
@@ -107,7 +110,7 @@ export const AppProvider: React.FC<AppProviderProps> = ({ children }) => {
       console.log(`Incoming Call`, from, offer);
 
       const ans = await PeerService.getAnswer(offer);
-      socket?.emit("call:accepted_res", {to : from , ans });
+      socket?.emit("call:accepted_res", { to: from, ans });
       console.log("Call Ans Send : ", ans);
 
     } catch (error) {
@@ -123,29 +126,62 @@ export const AppProvider: React.FC<AppProviderProps> = ({ children }) => {
     });
     setLocalStream(stream);
 
-       for (const track of localStream?.getTracks() || []) {
-          PeerService.peer.addTrack(track, localStream);
-          console.log("send streams called");
-      }
+    for (const track of stream?.getTracks() || []) {
+      PeerService.peer.addTrack(track, stream);
+      console.log("send streams called");
+    }
   }, [localStream]);
 
+
   const handleCallAccepted = useCallback(async ({ from, ans }: { from: string; ans: RTCSessionDescriptionInit }) => {
-    setpicked(true);
     await PeerService.setLocalDescription(ans);
     console.log("Call Accepted! from : ", from);
 
     socket.emit("eventcomplete");
     sendStreams();
-   
+
   }, [sendStreams])
 
 
+  //  *****************************************************  End Call ********************************************************
+  const end_call = () => {
+    window.location.href = '/'
+    if (PeerService.peer.RTCPeerConnection) {
+      const pc = PeerService.peer.RTCPeerConnection;
+  
+      if (pc.connectionState !== 'closed') {
+        const senders: RTCRtpSender[] = pc.getSenders();
+  
+        senders.forEach((sender: RTCRtpSender) => {
+          const track = sender.track;
+          if (track) {
+            track.stop();
+          }
+        });
+  
+        setLocalStream(null);
+  
+        senders.forEach((sender: RTCRtpSender) => {
+          pc.removeTrack(sender);
+        });
+  
+        console.log("Tracks removed successfully");
+  
+        pc.close();
+        console.log("Peer connection closed");
+      }
+  
+      navigate('/home');
+    }
+  };
+  
+  
 
 
   // ****************************************************** Negotiation Handler *********************************************************
 
   const handleNegoNeeded = useCallback(async() => {
-   
+
       const offer = await PeerService.getOffer();
       console.log("HandleNegoNeeded Triggered");
       socket.emit("peer:nego:needed", { offer, to: remoteSocketId });
@@ -155,10 +191,9 @@ export const AppProvider: React.FC<AppProviderProps> = ({ children }) => {
   const handleNegoNeedIncoming = useCallback (async ({ from, offer }: { from: string; offer: RTCSessionDescriptionInit }) => {
       const ans = await PeerService.getAnswer(offer);
       console.log("handleNegoNeedIncoming Triggered");
-      sendStreams();
       socket.emit("peer:nego:done", { to: from, ans });
+      sendStreams()
     },[
-
     ])
 
 
@@ -177,8 +212,8 @@ export const AppProvider: React.FC<AppProviderProps> = ({ children }) => {
 
   useEffect(() => {
     PeerService.peer.addEventListener("negotiationneeded", handleNegoNeeded);
-      // console.log("UseEffect of negotiationneed triggered ");
-      
+    // console.log("UseEffect of negotiationneed triggered ");
+
     return () => {
       PeerService.peer.removeEventListener("negotiationneeded", handleNegoNeeded);
       // console.log("Negotiation need removed event ");
@@ -190,7 +225,7 @@ export const AppProvider: React.FC<AppProviderProps> = ({ children }) => {
 
     PeerService.peer.addEventListener("track", async (ev: any) => {
       const [remoteStream] = await ev.streams;
-      // console.log("Tracks Incomming !!", remoteStream);
+      console.log("Tracks Incomming !!", remoteStream);
       setRemoteStream(remoteStream);
     });
 
@@ -210,6 +245,7 @@ export const AppProvider: React.FC<AppProviderProps> = ({ children }) => {
     socket.on("peer:nego:needed", handleNegoNeedIncoming);
     socket.on("peer:nego:final", handleNegoNeedFinal);
     socket.on("Finall_Call", sendStreams);
+    socket.on("hostpresent", sethostpresent_to_ture);
 
     return () => {
 
@@ -221,6 +257,7 @@ export const AppProvider: React.FC<AppProviderProps> = ({ children }) => {
       socket.off("peer:nego:needed", handleNegoNeedIncoming);
       socket.off("peer:nego:final", handleNegoNeedFinal);
       socket.off("Finall_Call", sendStreams);
+      socket.off("hostpresent", sethostpresent_to_ture);
 
     };
   }, [
@@ -228,11 +265,12 @@ export const AppProvider: React.FC<AppProviderProps> = ({ children }) => {
     setSocket_id,
     handleJoinRoom,
     handleUserJoined,
-    handleIncomingCall, 
+    handleIncomingCall,
     handleCallAccepted,
     handleNegoNeedIncoming,
     handleNegoNeedFinal,
-    sendStreams
+    sendStreams,
+    sethostpresent_to_ture
   ]);
 
 
@@ -240,14 +278,14 @@ export const AppProvider: React.FC<AppProviderProps> = ({ children }) => {
     socket,
     localStream,
     remoteStream,
-    picked,
-    Callphone,
-
+    host,
+    hostpresent,
+    end_call,
+    sethostName,
     sendStreams,
-    setCallphone,
     handleroom,
-    setpicked,
-    handleCallUser
+    handleCallUser,
+
   };
 
 

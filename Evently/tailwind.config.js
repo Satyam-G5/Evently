@@ -8,9 +8,21 @@ export default {
     extend: {
       fontFamily: {
         'custom': 'Comic Sans MS'
-      }
+      },
+  
+      
     },
   },
-  plugins: [],
+  plugins: [
+    function ({ addUtilities }) {
+      const newUtilities = {
+        '.custom-rounded': {
+          'border-radius': '4rem 0 4rem 0',
+        },
+      };
+
+      addUtilities(newUtilities, ['responsive', 'hover']);
+    },
+  ],
 }
 

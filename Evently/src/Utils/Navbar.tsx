@@ -15,10 +15,10 @@ const Navbar: React.FC = () => {
   } 
 
   return (
-    <nav className="w-full h-20 bg-custom fixed top-0 flex justify-between bg-white z-10">
-      <div className=" text-orange-800 font-bold mt-6 ml-3 flex flex-row">
-       <span className=" text-black bg-clip-text text-4xl ml-3">
-          <Link className='text-orange-800 font-custom' to='/'>
+    <nav className="w-full h-20 bg-custom fixed top-0 flex justify-between z-10 ">
+      <div className=" text-orange-800 font-bold flex flex-row bg-gray-100 h-20 rounded-r-full w-44">
+       <span className=" text-black bg-clip-text text-4xl mt-4 ml-3">
+          <Link className='text-orange-800 font-custom ml-3' to='/'>
             Evently
           </Link>
         </span>
@@ -39,14 +39,18 @@ const Navbar: React.FC = () => {
         </button>
         {/* Mobile Menu */}
         {isMobileMenuOpen && (
-          <div className="md:hidden flex flex-col rounded-md items-center bg-red-600 ">
-            <Link to="/dashboard" className="text-xl text-white bg-red-600 p-6 hover:cursor-pointer hover:text-gray-950">
-              Dashboard
-            </Link>
+          <div className="md:hidden flex flex-col rounded-md items-center bg-yellow-400 border-4 border-solid border-gray-100 w-36">
+        <Link to="/home" className="text-xl text-white p-3 hover:cursor-pointer ">
+          Home
+        </Link>
 
-            <Link to="/chat" className="text-xl text-white bg-red-600 p-6 hover:cursor-pointer hover:text-gray-950">
-              Chat
-            </Link>
+        <Link to="/Events" className="text-xl text-white p-3 hover:cursor-pointer">
+          Events
+        </Link>
+
+        <Link to="/premium" className="text-xl text-white p-3 hover:cursor-pointer">
+          Premium
+        </Link>
           </div>
         )}
       </div>
@@ -80,12 +84,12 @@ const Navbar: React.FC = () => {
               <path d="M18 15l3 -3" />
             </svg>
           </div>
-        </Link> : <Link className='' to="/signIn">
-          <div className="flex flex-row p-2 bg-white mr-4 rounded-lg shadow-lg hover:bg-slate-300 hover:cursor-pointer transition duration-300 ease-in-out transform hover:-translate-y+1 hover:scale-105">
-          <div className='font-semibold mr-2 mt-1'>
+        </Link> : <Link className='w-16 h-auto' to="/signIn">
+          <div className="ml-3 bg-yellow-500 text-white flex flex-row p-2 mr-4 rounded-full shadow-lg hover:bg-slate-300 hover:cursor-pointer transition duration-300 ease-in-out transform hover:-translate-y+1 hover:scale-105">
+          {/* <div className='font-semibold mr-2 mt-1'>
             LogIn
-          </div>
-            <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" className="lucide lucide-user-circle-2"><path d="M18 20a6 6 0 0 0-12 0" /><circle cx="12" cy="10" r="4" /><circle cx="12" cy="12" r="10" /></svg>
+          </div> */}
+            <svg xmlns="http://www.w3.org/2000/svg" width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" className="lucide lucide-user-circle-2"><path d="M18 20a6 6 0 0 0-12 0" /><circle cx="12" cy="10" r="4" /><circle cx="12" cy="12" r="10" /></svg>
           </div>
         </Link> }
         

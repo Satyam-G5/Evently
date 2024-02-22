@@ -8,8 +8,10 @@ import cors from 'cors'
 import router from "./Routes/user_registration";
 import events from "./Routes/events"
 import bookings from "./Routes/bookings"
-import pool from "./Database/postgres";
- 
+import payments from "./Routes/payments"
+import "./redis";
+
+//   Use toast npm pakage for the popups 
 
 dotenv.config();
 
@@ -26,6 +28,10 @@ const corsOptions = {
 app.use(express.json());
 app.use(bodyParser.json());
 
+
+// *********************************************************************************
+
+app.use('/' , payments); // stripe payments
 app.use('/' , router); // User Registration 
 app.use('/' , events); // Event management
 app.use('/' , bookings); // booking management
@@ -61,6 +67,7 @@ io.on("connection", (socket: Socket) => {
     socketidToEmailMap.set(socket.id, mail);
 
     io.to(room).emit("user:joined",   { mail, socketId: socket.id } );
+    io.to(room).emit("user:joined_toast",  mail  );
     socket.join(room)
     io.to(socket.id).emit("room:join", mail , room);
   });
@@ -75,20 +82,16 @@ io.on("connection", (socket: Socket) => {
     // io.to(reciever_id).emit('call_incoming' , Name);
     console.log("Incoming Call from the caller "); 
     io.to(user).emit("incomming:call", { from: socket.id , offer });
-         
-     
   });    
+
  
   // //  **************************************************** Call Acceptance *******************************************************************
-
-  
 
   socket.on("call:accepted_res", ({to , ans }) => {
     console.log("Call Accepted true");
     
     io.to(to).emit("call:accepted", { from: socket.id, ans }); 
     console.log("Answer send to caller : " , ans);
-              
   });                
             
   
@@ -110,9 +113,15 @@ io.on("connection", (socket: Socket) => {
     console.log("********** Final Call Triggered ***********");
         
   }) 
-       
-  // socket.on('disconnect', () => {
-  //   users = users.filter(user => user.socketId !== socket.id);
-  //   io.emit('getUsers', users);
-  // });  
+
+  // ************************************* Message Socket Logic *********************************** 
+  
+  socket.on('hostpresent' , (hostpresent) =>{
+    socket.broadcast.emit('hostpresent')
+  });
+
+  socket.on('sendMessage', ({data}: any) => { 
+    // console.log("Data in backend  : " , data);
+    socket.broadcast.emit('getMessasge' , {data})
+  });  
 });    

@@ -26,6 +26,7 @@ CREATE TABLE events(
 CREATE TABLE bookmeet(
     user_id SERIAL PRIMARY KEY,
     link VARCHAR ,
+    booker VARCHAR,
     host VARCHAR ,
     users VARCHAR ,
     video_chat VARCHAR ,

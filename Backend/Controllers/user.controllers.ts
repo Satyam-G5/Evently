@@ -19,6 +19,7 @@ const addusers = async (req: any, res: Response) => {
         // Password Hashing ...
         if (!firstname || !lastname || !email || !password ) {
             console.log("Get undef");
+            return res.status(401).json({ success: false, message: "Informaition Missing" });
         } else {
             const salt = await bcrypt.genSalt(8);
             const hashpass = await bcrypt.hash(password, salt);

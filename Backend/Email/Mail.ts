@@ -1,7 +1,7 @@
 import nodemailer from 'nodemailer';
 import Maingen from "mailgen";
 
-module.exports.sendMessage = async (reciever : string) => {
+const sendMessage = async (video_chat: string , booker : string , host : string  , date :string , time : string , users : string) => {
     // ... your existing code for the sendMessage function
     let config = {
         service : 'gmail',
@@ -22,18 +22,25 @@ module.exports.sendMessage = async (reciever : string) => {
     });
     
     let response = {
-        body : { 
-            intro : `NEW MEETING SCHEDULED ` ,
-            outro : 'You have new meeting Scheduled with ${} . Please visit the website for further details .'
-        }
-    }
+        body: {
+          intro: `Hello ,<br><br> You have an upcoming meeting scheduled at ${time} on ${date}.`,
+          outro: `<br>Upcoming meeting alert on Evently:<br>
+                    <strong>Booked by:</strong> ${booker}<br>
+                    <strong>Host:</strong> ${host}<br>
+                    <strong>Time:</strong> ${time}<br>
+                    <strong>Date:</strong> ${date}<br>
+                    <strong>Meeting Place:</strong> Evently Website<br>
+                    <strong>Meeting Link:</strong> ${video_chat}<br><br>
+                    Please click the link above to join the meeting.`,
+        },
+      };
     
     let Mail = Mailgenerator.generate(response)
 
     let message = {
         from : process.env.EMAIL ,
-        to : reciever,
-        subject : 'Evently - NEW MEETING',
+        to : [users, host] ,
+        subject : 'Evently - Upcomming Meeting Alert',
         html : Mail
     }
 
@@ -42,3 +49,5 @@ module.exports.sendMessage = async (reciever : string) => {
 
     
   };   
+
+export {sendMessage};

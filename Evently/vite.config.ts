@@ -32,6 +32,9 @@ export default defineConfig({
       },
       "/collect_book" : {
         target : "http://localhost:8000"
+      },
+      "/create-payment-intent" : {
+        target : "http://localhost:8000"
       }
     }
   },

@@ -12,9 +12,11 @@ interface AppContextType {
     seturl : any ;
     BookingState :any ;
     setBookingState :any;
+    client : any ;
     changeLoginState: (login: boolean) => void;
     changeToken: (newtoken: string) => void;
     getuser_details: () => void;
+    set_client : (get_key : any) => void ;
 }
 
 // Create the context
@@ -41,9 +43,14 @@ export const AppProvider: React.FC<AppProviderProps> = ({ children }) => {
     const [Name , setName] = useState<string>('');
     const [Email , setEmail] = useState<string>('');
     const [BookingState , setBookingState] = useState<boolean>(false)
-    const [url  ,seturl] = useState()
+    const [url  ,seturl] = useState();
+    const [client , setclient] = useState();
    
-
+    const set_client  =(get_key : any) => {
+        setclient(get_key)
+        console.log("client key : " , get_key);
+        
+    }
 
     const changeLoginState = (login: boolean) => {
         setLoginState(login);
@@ -119,6 +126,8 @@ export const AppProvider: React.FC<AppProviderProps> = ({ children }) => {
         Email,
         BookingState , 
         url ,
+        client,
+        set_client,
         seturl,
         setBookingState,
         changeLoginState,

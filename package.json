@@ -1,7 +1,13 @@
 {
   "dependencies": {
+    "@stripe/react-stripe-js": "^2.4.0",
+    "@stripe/stripe-js": "^2.4.0",
     "react-calendar": "^4.8.0",
+    "react-stripe-checkout": "^2.6.3",
+    "react-stripe-checkout-nsen": "^2.6.13",
     "react-time-picker": "^6.6.0",
+    "react-toastify": "^10.0.4",
+    "stripe": "^14.15.0",
     "uuid": "^9.0.1"
   },
   "devDependencies": {

@@ -35,7 +35,7 @@ async function get_events (req: Request, res: Response) {
         }else{
             // console.log("Email recieved : ",Email);
             
-            const get_all_events = await pool.query(`SELECT link FROM events WHERE Email = '${Email}'`);
+            const get_all_events = await pool.query(`SELECT * FROM events WHERE Email = '${Email}'`);
     
             // console.log("Rows Got --> " , get_all_events.rowCount);
             
