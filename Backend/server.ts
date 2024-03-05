@@ -21,10 +21,12 @@ const httpServer = createServer(app);
 const port = process.env.PORT || 8000;
 
 const corsOptions = { 
-  origin: '*',
+  origin: 'https://evently-nu-eight.vercel.app/',
   methods: ['GET', 'POST'],
 }; 
 
+app.use(cors(
+  corsOptions    ));
 
 app.use(express.json());
 app.use(bodyParser.json());
