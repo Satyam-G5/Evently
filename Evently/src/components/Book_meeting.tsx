@@ -213,9 +213,9 @@ const Book_meeting: React.FC = () => {
                 )}
             </div> : <div>
                 <div className='flex flex-col justify-center items-center'>
-                    <p className='text-3xl font-semibold text-center'>Please Sing-In to continue</p>
+                    <p className='mt-80 text-4xl font-semibold text-center'>Please Sing-In to Continue . . .</p>
                     <Link to='/signIn'>
-                        <button className='mt-4 bg-gray-300 text-gray-800 py-2 px-4 rounded-full hover:bg-gray-400 hover:cursor-pointer transition duration-300 ease-in-out transform hover:-translate-y+1 hover:scale-105'>Sign-In</button>
+                        <button className='mt-10 bg-gradient-to-r from-yellow-500 via-yellow-400 to-yellow-300 text-gray-800 font-semibold py-2 px-4 rounded-full hover:bg-gray-400 hover:cursor-pointer transition duration-300 ease-in-out transform hover:-translate-y+1 hover:scale-105'>Sign-In</button>
                     </Link>
                 </div>
             </div>

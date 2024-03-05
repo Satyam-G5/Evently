@@ -34,4 +34,3 @@ CREATE TABLE bookmeet(
     time VARCHAR
 );
 
-

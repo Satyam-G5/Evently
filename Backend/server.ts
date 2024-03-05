@@ -9,6 +9,7 @@ import router from "./Routes/user_registration";
 import events from "./Routes/events"
 import bookings from "./Routes/bookings"
 import payments from "./Routes/payments"
+import delete_bookings from "./Routes/delete_bookings"
 import "./redis";
 
 //   Use toast npm pakage for the popups 
@@ -35,6 +36,7 @@ app.use('/' , payments); // stripe payments
 app.use('/' , router); // User Registration 
 app.use('/' , events); // Event management
 app.use('/' , bookings); // booking management
+app.use('/' , delete_bookings); // delete bookings
 
 app.get("/", (req: Request, res: Response) => {
   res.send("Express + TypeScript Server");

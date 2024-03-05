@@ -141,6 +141,39 @@ const Home: React.FC = () => {
     }
   };
 
+  const HandleDelete = async (host : any  ,users  : any, video_chat  : any ,  date : any  , time : any) => {
+    try {
+      console.log("Data" ,host  ,users , video_chat  ,  date  , time);
+      
+      const response = await fetch("/delbooking", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ 
+          host  ,
+          users , 
+          video_chat   ,  
+          date  , 
+          time
+        
+        }),
+      });
+
+      if (response) {
+      const data = await response.json();
+        console.log(data);
+        toast("Deleted Successfully")
+        allbookings();
+      } else {
+        console.log("Error deleting the req");
+        
+      }
+    } catch (error) {
+      console.error("Error during delete operation:", error);
+    }
+  }
+
   useEffect(() => {
     if (socex?.hostpresent == true) {
       toast(`Host present in the room . Please Join !`)
@@ -206,7 +239,7 @@ const Home: React.FC = () => {
             <h1 className='font-semibold text-3xl text-center md:ml-0 ml-12'>Upcomming Booked Meetings</h1>
 
             {book.length > 0 ? (
-              <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mt-8'>
+              <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mt-8 overflow-y-scroll max-h-96'>
                 {book.map((booking, index) => (
                   <div key={index} className='md:ml-0 ml-5 w-4/5 h-4/5 custom-rounded shadow-lg shadow-slate-600 flex bg-gradient-to-r from-yellow-500 via-yellow-400 to-yellow-300 p-2 mt-10'>
                     <div className='flex flex-col'>
@@ -214,12 +247,8 @@ const Home: React.FC = () => {
                         <div className='font-custom font-semibold flex justify-center items-center text-md w-[95%] text-slate-500'>
                           {Eventname}
                         </div>
-                        <button className='' onClick={handleOpenPopup}>
-                          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" className="lucide lucide-menu">
-                            <line x1="4" x2="20" y1="12" y2="12" />
-                            <line x1="4" x2="20" y1="6" y2="6" />
-                            <line x1="4" x2="20" y1="18" y2="18" />
-                          </svg>
+                        <button className='hover:cursor-pointer transition duration-300 ease-in-out transform hover:-translate-y+1 hover:scale-105' onClick={() => {HandleDelete(booking.host , booking.users, booking.video_chat , booking.date ,booking.time)}}>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" className="lucide lucide-trash-2"><path d="M3 6h18"/><path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6"/><path d="M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2"/><line x1="10" x2="10" y1="11" y2="17"/><line x1="14" x2="14" y1="11" y2="17"/></svg>
                         </button>
                       </div>
                       <div className='flex flex-row justify-between'>

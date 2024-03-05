@@ -3,27 +3,39 @@ import pool from "../Database/postgres";
 
 async function save_events(req: Request, res: Response) {
     try {
-        const { Email ,link, time_start, time_end, event_name, days_selected, duration } = req.body;
-
-        // console.log("INFO recieved : ",Email ,link, time_start, time_end, event_name, days_selected, duration);
-        
+        const { Email, link, time_start, time_end, event_name, days_selected, duration } = req.body;
 
         if (!Email || !link || !time_start || !time_end || !event_name || !days_selected || !duration) {
-            console.log("Information not recieved")
-        } else {
-            const save_data = await pool.query("INSERT INTO events(Email ,link , time_start , time_end , event_name , days_selected , duration ) VALUES ($1, $2, $3, $4 ,$5 , $6 , $7) RETURNING *",
-                [Email ,link, time_start, time_end, event_name, days_selected, duration]
+            console.log("Information not received");
+            res.status(400).json({ error: "Information not received" });
+            return;
+        }
+
+        // Check if Email exists in the database
+        const existingRecord = await pool.query("SELECT * FROM events WHERE Email = $1", [Email]);
+
+        if (existingRecord.rows.length > 0) {
+            // Email exists, perform an UPDATE query
+            const update_data = await pool.query(
+                "UPDATE events SET link = $2, time_start = $3, time_end = $4, event_name = $5, days_selected = $6, duration = $7 WHERE Email = $1 RETURNING *",
+                [Email, link, time_start, time_end, event_name, days_selected, duration]
             );
-            res.status(200).json(save_data.rows[0])
-            // console.log("Data saved to database " , save_data.rows[0]);
-            
+            res.status(200).json(update_data.rows[0]);
+        } else {
+            // Email does not exist, perform an INSERT query
+            const save_data = await pool.query(
+                "INSERT INTO events(Email, link, time_start, time_end, event_name, days_selected, duration) VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING *",
+                [Email, link, time_start, time_end, event_name, days_selected, duration]
+            );
+            res.status(200).json(save_data.rows[0]);
         }
 
     } catch (error) {
-        console.log("error : ", error)
-        res.send("Error in Saving Events ")
+        console.log("Error: ", error);
+        res.status(500).json({ error: "Error in Saving Events" });
     }
 }
+
 
 async function get_events (req: Request, res: Response) {
     try {

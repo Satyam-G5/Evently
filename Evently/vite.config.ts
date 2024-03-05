@@ -35,7 +35,11 @@ export default defineConfig({
       },
       "/create-payment-intent" : {
         target : "http://localhost:8000"
+      },
+      "/delbooking" : {
+        target : "http://localhost:8000"
       }
+
     }
   },
   plugins: [react()],
