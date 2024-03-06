@@ -28,7 +28,7 @@ const signIn: React.FC = () => {
   const checkuser = async () => {
     const { email, password } = data;
     try {
-      const response = await fetch("/log_user", {
+      const response = await fetch('https://evently-m4zq.onrender.com'+'/log_user', {
         method: "POST",
         headers: {
           'Content-Type': 'application/json'

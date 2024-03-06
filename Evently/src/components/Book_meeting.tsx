@@ -67,7 +67,7 @@ const Book_meeting: React.FC = () => {
     }, [])
 
     const fetch_events = async () => {
-        const event_details = await fetch('/book_events', {
+        const event_details = await fetch('https://evently-m4zq.onrender.com'+'/book_events', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -108,7 +108,7 @@ const Book_meeting: React.FC = () => {
     
     useEffect(() => {
 
-        const chat = `http://localhost:5173/meet_link/${category}/${meetingId}`
+        const chat = `https://evently-nu-eight.vercel.app/meet_link/${category}/${meetingId}`
         setrepo(prevuser => ({
             ...prevuser,
             link: data.link,
@@ -126,7 +126,7 @@ const Book_meeting: React.FC = () => {
         const { link,booker, host, users, video_chat, date, time } = repo;
         console.log("data sending : ", link,booker, host, users, video_chat, date, time);
 
-        const response = await fetch('/booking_success', {
+        const response = await fetch('https://evently-m4zq.onrender.com'+'/booking_success', {
             method: "POST",
             headers: {
                 'Content-Type': 'application/json'

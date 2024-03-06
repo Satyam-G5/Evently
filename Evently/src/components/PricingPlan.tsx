@@ -14,7 +14,7 @@ const PricingPlan = () => {
   const handleopenPopup = async (plan_price: any, plan_name: any) => {
 
 
-    const response = await fetch('/create-payment-intent', {
+    const response = await fetch('https://evently-m4zq.onrender.com'+'/create-payment-intent', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',

@@ -88,7 +88,7 @@ const Events: React.FC = () => {
         console.log("Data Sending : ",Email, link, time_start, time_end, event_name,days_selected, duration );
         
         try {
-            const response = await fetch('/save_events' , {
+            const response = await fetch('https://evently-m4zq.onrender.com'+'/save_events' , {
                 method : 'POST',
                 headers : {
                     'Content-Type': 'application/json'
@@ -127,7 +127,7 @@ const Events: React.FC = () => {
         const meetingId = generateMeetingId();
 
         // Construct the meeting link
-        const Link = `http://localhost:5173/booking/${appex?.Name}/${eventname}/${meetingId}`;
+        const Link = `https://evently-nu-eight.vercel.app/booking/${appex?.Name}/${eventname}/${meetingId}`;
         console.log("Link Generated --> ", Link);
         setEventLink(Link)
         setshowlink(true)

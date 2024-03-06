@@ -59,7 +59,7 @@ const Home: React.FC = () => {
 
       console.log("Getlinks function -->", mail);
 
-      const response = await fetch('/get_events', {
+      const response = await fetch('https://evently-m4zq.onrender.com'+'/get_events', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
@@ -92,7 +92,7 @@ const Home: React.FC = () => {
 
   async function allbookings() {
     const mail = appex?.Email;
-    const response = await fetch('/collect_book', {
+    const response = await fetch('https://evently-m4zq.onrender.com'+'/collect_book', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
@@ -145,7 +145,7 @@ const Home: React.FC = () => {
     try {
       console.log("Data" ,host  ,users , video_chat  ,  date  , time);
       
-      const response = await fetch("/delbooking", {
+      const response = await fetch('https://evently-m4zq.onrender.com'+'/delbooking', {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

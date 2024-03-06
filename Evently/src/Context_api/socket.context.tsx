@@ -2,7 +2,7 @@ import React, { createContext, ReactNode, useState, useContext, useEffect, useCa
 import { useNavigate } from 'react-router-dom';
 import { io, Socket } from 'socket.io-client';
 import PeerService from "../Web-rtc/peer";
-const socket = io('http://localhost:8000');
+const socket = io('https://evently-m4zq.onrender.com');
 
 
 interface SocketContextType {
@@ -58,7 +58,7 @@ export const AppProvider: React.FC<AppProviderProps> = ({ children }) => {
 
   const handleroom = useCallback(
     (mail: any, room_id: any) => {
-      const room = room_id.replace('http://localhost:5173/', '');
+      const room = room_id.replace('https://evently-nu-eight.vercel.app/', '');
       console.log("Mail in handleroom", mail);
 
       socket.emit("room:join", mail, room);
