@@ -3,7 +3,8 @@ import Redis from 'ioredis';
 import pool from './Database/postgres';
 import { sendMessage } from './Email/Mail';
 
-const redis = new Redis();
+const internalRedisUrl = 'redis://red-cnk7pcnsc6pc73f7tqi0:6379';
+const redis = new Redis(internalRedisUrl);
 
 const sendEmail = async (meetingId: string, video_chat: string , booker : string , host : string  , date :string , time : string , users : string  ) => {
   sendMessage(video_chat , booker , host , date , time , users);

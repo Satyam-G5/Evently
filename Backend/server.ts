@@ -21,7 +21,7 @@ const httpServer = createServer(app);
 const port = process.env.PORT || 8000;
 
 const corsOptions = { 
-  origin: 'https://evently-nu-eight.vercel.app',
+  origin: '*',
   methods: ['GET', 'POST'],
 }; 
 
