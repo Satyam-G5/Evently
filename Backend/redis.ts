@@ -1,3 +1,8 @@
+import cron from 'node-cron';
+import Redis from 'ioredis';
+import pool from './Database/postgres';
+import { sendMessage } from './Email/Mail';
+
 const internalRedisUrl = 'redis://red-cnk7pcnsc6pc73f7tqi0:6379';
 const redis = new Redis(internalRedisUrl);
 
