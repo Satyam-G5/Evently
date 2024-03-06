@@ -1,0 +1,12 @@
+{
+    "routes" : [
+        {
+            "src" : "/booking/:username/:category/:meetingId",
+            "dest" : "/"
+        },
+        {
+            "src" : "/",
+            "dest" : "/"
+        }
+    ]
+}
