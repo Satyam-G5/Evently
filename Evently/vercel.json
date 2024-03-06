@@ -1,12 +1,5 @@
 {
-    "routes" : [
-        {
-            "src" : "/booking/:username/:category/:meetingId",
-            "dest" : "/"
-        },
-        {
-            "src" : "/",
-            "dest" : "/"
-        }
-    ]
-}
+    "rewrites":  [
+        {"source": "/(.*)", "destination": "/"}
+     ]
+ }
