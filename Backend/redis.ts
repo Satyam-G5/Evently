@@ -3,8 +3,15 @@ import Redis from 'ioredis';
 import pool from './Database/postgres';
 import { sendMessage } from './Email/Mail';
 
-const internalRedisUrl = 'redis://red-cnk7pcnsc6pc73f7tqi0:6379';
-const redis = new Redis(internalRedisUrl);
+// const internalRedisUrl = 'redis://red-cnk7pcnsc6pc73f7tqi0:6379';  // Render
+const redis = new Redis({
+    port : 17112 ,
+    host : 'redis-17112.c326.us-east-1-3.ec2.cloud.redislabs.com',
+    username : 'default' ,
+    password : '0ZpibZDlfIu8qulHW6C5EuHnxYR8hIOr'
+});
+
+// redis-cli -u redis://default:0ZpibZDlfIu8qulHW6C5EuHnxYR8hIOr@redis-17112.c326.us-east-1-3.ec2.cloud.redislabs.com:17112
 
 // Function to handle sending email
 const sendEmail = async (meetingId: string, video_chat: string, booker: string, host: string, date: string, time: string, users: string) => {
