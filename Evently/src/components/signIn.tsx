@@ -4,6 +4,7 @@ import AppContext from '../Context_api/user.context'
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import image from '../assets/back-transformed.jpeg'
+import Cookies from 'js-cookie';
 
 
 const signIn: React.FC = () => {
@@ -54,6 +55,8 @@ const signIn: React.FC = () => {
         }
         appContext.changeLoginState(login_success)
         appContext.changeToken(newtoken)
+        Cookies.set('token', newtoken, { expires: 1/24 });
+        Cookies.set('loginState', 'true', { expires: 1/24 });
         if(appContext.BookingState){
           console.log("Url inthe signin component : " , appContext.url);
           

@@ -1,5 +1,5 @@
 import React, { createContext, useState, ReactNode, useEffect  } from 'react';
-
+import Cookies from 'js-cookie';
 
 // Define the context type
 interface AppContextType {
@@ -61,16 +61,20 @@ export const AppProvider: React.FC<AppProviderProps> = ({ children }) => {
     };
 
     const getuser_details = async () => {
-        if (token) {
+        if (Cookies.get('token')) {
+            const username = Cookies.get('token');
+            setToken(username);
+            console.log('User cookie exists!', username);
+           
+        if (token || username) {
             try {
-                
 
                 const response = await fetch('https://evently-m4zq.onrender.com'+'/get_user', {
                     method: "GET",
                     headers: {
                         'content-type': 'application/json',
                         'accept': 'application/json',
-                        "Authorization": `${token}`
+                        "Authorization": `${token || username}`
                     }
                 })
                 if (response.ok) {
@@ -94,6 +98,7 @@ export const AppProvider: React.FC<AppProviderProps> = ({ children }) => {
                 console.log("error Notice", error)
             }
         }
+    }
     }
 
   
