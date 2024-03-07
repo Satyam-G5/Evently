@@ -42,9 +42,13 @@ const Navbar: React.FC = () => {
         {/* Mobile Menu */}
         {isMobileMenuOpen && (
           <div className="md:hidden flex flex-col rounded-md items-center bg-yellow-400 border-4 border-solid border-gray-100 w-36">
-        <Link to="/home" className="text-xl text-white p-3 hover:cursor-pointer ">
-          Home
+        {appcontext?.loginState ? <Link to="/About" className="text-xl text-white p-3 hover:cursor-pointer">
+        DashBoard
+        </Link>:
+        <Link to="/signIn" className="text-xl text-white p-3 hover:cursor-pointer">
+        DashBoard
         </Link>
+        }
 
         <Link to="/About" className="text-xl text-white p-3 hover:cursor-pointer">
           About
@@ -61,12 +65,16 @@ const Navbar: React.FC = () => {
       {/* Desktop Menu */}
       <div className="hidden md:bg-orange-800 md:rounded-full md:h-16 md:w-96 border-t-4 md:flex md:flex-row md:justify-evenly md:mt-8 md:mr-2 ">
 
-        <Link to="/home" className="text-xl text-white p-3 hover:cursor-pointer ">
-          Home
+        {appcontext?.loginState ? <Link to="/About" className="text-xl text-white p-3 hover:cursor-pointer">
+        DashBoard
+        </Link>:
+        <Link to="/signIn" className="text-xl text-white p-3 hover:cursor-pointer">
+        DashBoard
         </Link>
+        }
 
-        <Link to="/About" className="text-xl text-white p-3 hover:cursor-pointer">
-        About Me
+        <Link to="/home" className="text-xl text-white p-3 hover:cursor-pointer ">
+          About Me
         </Link>
 
         <Link to="/premium" className="text-xl text-white p-3 hover:cursor-pointer">
