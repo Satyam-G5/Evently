@@ -2,6 +2,9 @@ import React from 'react'
 import image from '../assets/back-transformed.jpeg'
 import { Link } from 'react-router-dom'
 import { motion } from 'framer-motion';
+import Cookies from 'js-cookie';
+
+const username = Cookies.get('token');
 
 const start_page: React.FC = () => {
   return (
@@ -28,12 +31,19 @@ const start_page: React.FC = () => {
           transition={{ duration: 1 }}
           className='flex md:flex-row md:justify-center flex-col items-center p-2'>
 
+            {username ? <Link to='/home'>
+            <button className='flex flex-row mt-12 md:ml-6 h-12 w-40 text-white bg-orange-800 hover:text-white hover:bg-black font-semibold border-2 '>
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" className="ml-2 mr-2 mt-2 lucide lucide-sparkle"><path d="m12 3-1.9 5.8a2 2 0 0 1-1.287 1.288L3 12l5.8 1.9a2 2 0 0 1 1.288 1.287L12 21l1.9-5.8a2 2 0 0 1 1.287-1.288L21 12l-5.8-1.9a2 2 0 0 1-1.288-1.287Z" /></svg>                
+              <span className='mt-2 ml-2 font-semibold'>Get Started</span>
+            </button>
+            </Link> : 
           <Link className='' to="/signIn">
             <button className='flex flex-row mt-12 md:ml-6 h-12 w-40 text-white bg-orange-800 hover:text-white hover:bg-black font-semibold border-2 '>
               <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" className="ml-2 mr-2 mt-2 lucide lucide-sparkle"><path d="m12 3-1.9 5.8a2 2 0 0 1-1.287 1.288L3 12l5.8 1.9a2 2 0 0 1 1.288 1.287L12 21l1.9-5.8a2 2 0 0 1 1.287-1.288L21 12l-5.8-1.9a2 2 0 0 1-1.288-1.287Z" /></svg>                
               <span className='mt-2 ml-2 font-semibold'>Get Started</span>
             </button>
           </Link>
+          }
           <Link className='font-custom' to="/register">
             <button className='flex flex-row md:mt-12 mt-8 md:ml-6 h-12 w-88 text-black hover:text-white hover:bg-black font-semibold border-2 rounded-full border-black'>
               <span className='mt-2 ml-2 text-md font-semibold'>Register with Us</span>
