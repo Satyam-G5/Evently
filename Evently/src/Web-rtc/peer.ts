@@ -16,26 +16,26 @@ class PeerService {
   
             ],
             },
-            // {
-            //   urls: "turn:standard.relay.metered.ca:80",
-            //   username: "22b236d9eac7166ce45292bc",
-            //   credential: "wgKy9Vb87N2lt2f6",
-            // },
-            // {
-            //   urls: "turn:standard.relay.metered.ca:80?transport=tcp",
-            //   username: "22b236d9eac7166ce45292bc",
-            //   credential: "wgKy9Vb87N2lt2f6",
-            // },
-            // {
-            //   urls: "turn:standard.relay.metered.ca:443",
-            //   username: "22b236d9eac7166ce45292bc",
-            //   credential: "wgKy9Vb87N2lt2f6",
-            // },
-            // {
-            //   urls: "turn:standard.relay.metered.ca:443?transport=tcp",
-            //   username: "22b236d9eac7166ce45292bc",
-            //   credential: "wgKy9Vb87N2lt2f6",
-            // },
+            {
+              urls: "turn:standard.relay.metered.ca:80",
+              username: "22b236d9eac7166ce45292bc",
+              credential: "wgKy9Vb87N2lt2f6",
+            },
+            {
+              urls: "turn:standard.relay.metered.ca:80?transport=tcp",
+              username: "22b236d9eac7166ce45292bc",
+              credential: "wgKy9Vb87N2lt2f6",
+            },
+            {
+              urls: "turn:standard.relay.metered.ca:443",
+              username: "22b236d9eac7166ce45292bc",
+              credential: "wgKy9Vb87N2lt2f6",
+            },
+            {
+              urls: "turn:standard.relay.metered.ca:443?transport=tcp",
+              username: "22b236d9eac7166ce45292bc",
+              credential: "wgKy9Vb87N2lt2f6",
+            },
   
             // { urls: 'stun:freestun.net:5350' },
             // {urls: "stun:freeturn.net:5349"},
