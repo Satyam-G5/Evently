@@ -160,7 +160,7 @@ const register : React.FC= () => {
                             data-te-ripple-init
                             data-te-ripple-color="light">
                             <Link to="/signIn">
-                              SingIn
+                              SignIn
                             </Link>
                           </button>
                         </div>

@@ -182,7 +182,7 @@ const Book_meeting: React.FC = () => {
                         </div>
                         <div className='flex flex-col md:mb-12 items-center justify-evenly'>
                             <p className='font-semibold text-xl'> what time works best for you ?</p>
-                            <p className=''>Available Slot - {data.time_start} to {data.time_end} </p>
+                            <p className=''>Preffered Time Slot for {username} - {data.time_start} to {data.time_end} </p>
                             <div className='w-40 overflow-hidden '><TimePicker className='border-2 border-black rounder-full shadow-lg' onChange={starttimeChange} value={startTime} /></div>
                         </div>
                     </div>
@@ -213,7 +213,7 @@ const Book_meeting: React.FC = () => {
                 )}
             </div> : <div>
                 <div className='flex flex-col justify-center items-center'>
-                    <p className='mt-80 text-4xl font-semibold text-center'>Please Sing-In to Continue . . .</p>
+                    <p className='mt-80 text-4xl font-semibold text-center'>Please Sign-In to Continue . . .</p>
                     <Link to='/signIn'>
                         <button className='mt-10 bg-gradient-to-r from-yellow-500 via-yellow-400 to-yellow-300 text-gray-800 font-semibold py-2 px-4 rounded-full hover:bg-gray-400 hover:cursor-pointer transition duration-300 ease-in-out transform hover:-translate-y+1 hover:scale-105'>Sign-In</button>
                     </Link>

@@ -64,6 +64,7 @@ export const AppProvider: React.FC<AppProviderProps> = ({ children }) => {
         if (Cookies.get('token')) {
             const username = Cookies.get('token');
             setToken(username);
+            setLoginState(true);
             console.log('User cookie exists!', username);
            
         if (token || username) {

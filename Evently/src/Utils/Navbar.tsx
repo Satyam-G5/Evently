@@ -1,6 +1,7 @@
 import React, { useState ,useContext } from 'react';
 import { Link } from 'react-router-dom';
 import AppContext from '../Context_api/user.context';
+import Cookies from 'js-cookie';
 
 const Navbar: React.FC = () => {
     const appcontext = useContext(AppContext);
@@ -12,6 +13,7 @@ const Navbar: React.FC = () => {
 
   const logout =async () => {
     appcontext?.changeLoginState(false);
+    Cookies.remove('token');
   } 
 
   return (
