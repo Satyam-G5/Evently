@@ -3,6 +3,7 @@ import AppContext from '../Context_api/user.context'
 import { Link, useParams , useNavigate } from 'react-router-dom'
 import images from '../assets/images.png'
 import image from '../assets/back-transformed.jpeg'
+import { ToastContainer, toast } from 'react-toastify'
 
 
 import Calendar from 'react-calendar';
@@ -145,6 +146,8 @@ const Book_meeting: React.FC = () => {
         if (response.ok) {
             console.log("Meeting successfully booked");
             setbooking_success(true)
+        }else{
+            toast("Meeting Already Available for the selected Date and Time !");
         }
     }
 
@@ -164,6 +167,8 @@ const Book_meeting: React.FC = () => {
         <div className='h-screen bg-cover ' style={{ backgroundImage: `url(${image})` }}>
             {appex?.loginState ? <div>
                 <div className='flex flex-col justify-center items-center'>
+      <ToastContainer className='w-full md:w-1/2 mt-32 md:mt-40' />
+
                     <div className=' mt-40 bg-gray-100 font-semibold text-3xl flex justify-center items-center'>
                         Book a meeting with {username} - {category}
                     </div>
