@@ -97,7 +97,7 @@ const join_meet: React.FC = () => {
                   <div className="shadow-lg overflow-hidden">
                     <ReactPlayer
                       playing
-                      muted
+                      muted = {false}
                       height="400px"
                       width="800px"
                       url={contextSocket?.remoteStream}

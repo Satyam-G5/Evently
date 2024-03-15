@@ -3,13 +3,8 @@ import Redis from 'ioredis';
 import pool from './Database/postgres';
 import { sendMessage } from './Email/Mail';
 
-// const internalRedisUrl = 'redis://red-cnk7pcnsc6pc73f7tqi0:6379';  // Render
-const redis = new Redis({
-    port : 17112 ,
-    host : 'redis-17112.c326.us-east-1-3.ec2.cloud.redislabs.com',
-    username : 'default' ,
-    password : '0ZpibZDlfIu8qulHW6C5EuHnxYR8hIOr'
-});
+const internalRedisUrl = 'rediss://red-cnk7pcnsc6pc73f7tqi0:JCzr3tsxgSmAMCXgiITf4F7BAN0kohOd@oregon-redis.render.com:6379';  // Render
+const redis = new Redis(internalRedisUrl);
 
 // redis-cli -u redis://default:0ZpibZDlfIu8qulHW6C5EuHnxYR8hIOr@redis-17112.c326.us-east-1-3.ec2.cloud.redislabs.com:17112
 
