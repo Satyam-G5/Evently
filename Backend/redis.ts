@@ -19,7 +19,9 @@ const sendEmail = async (meetingId: string, video_chat: string, booker: string, 
 };
 
 // Define a cron job to run every minute (adjust the schedule as needed)
-cron.schedule('*/30 * * * *', async () => {
+// cron.schedule('*/30 * * * *', async () => {
+cron.schedule('* * * * *', async () => {
+
   try {
     console.log('Checking for scheduled emails...');
 
